@@ -50,10 +50,10 @@ def create_category(new_category):
 
         db_cursor.execute("""
         INSERT INTO categories
-            ('label')
+            (label)
         VALUES
             (?);
-        """, (new_category['label']))
+        """, (new_category['label'], ))
 
         id = db_cursor.lastrowid
         new_category['id'] = id
