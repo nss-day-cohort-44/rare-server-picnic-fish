@@ -150,5 +150,43 @@ VALUES (
   1
 );
 
+<<<<<<< HEAD
 SELECT *
 FROM Posts
+=======
+
+
+INSERT INTO Users (
+          'first_name', 
+          'last_name', 
+          'email', 
+          'password', 
+          'bio', 
+          'username',
+          'profile_image_url',
+          'created_on', 
+          'active',
+          'account_type_id') VALUES (
+            "Ellie", 
+            "Levine", 
+            "ellie@lo.com",
+            "password",
+            "I'm a nice person",
+            "ellie",
+            "http://",
+            "1598458543321",
+            1,
+            2
+          );
+
+DELETE FROM Users
+WHERE id = 1
+
+INSERT INTO categories
+    (label)
+VALUES
+  (?);
+(new_category['label'])
+
+INSERT INTO Categories ('label') VALUES ('backend developer');
+>>>>>>> f0234ef1f70216d6983d845fc4023e976fbba1d1

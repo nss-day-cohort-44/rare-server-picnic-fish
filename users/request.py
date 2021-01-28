@@ -109,8 +109,8 @@ def create_user(new_user):
             'created_on', 
             'active',
             'account_type_id') 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-;   
+            VALUES 
+            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);   
         """, (new_user['firstName'], 
             new_user['lastName'], 
             new_user['email'],
@@ -120,7 +120,7 @@ def create_user(new_user):
             new_user['profileImageUrl'],
             new_user['createdOn'],
             new_user['active'],
-            new_user['account_type_id']
+            new_user['accountTypeId']
             ))
 
         id = db_cursor.lastrowid
