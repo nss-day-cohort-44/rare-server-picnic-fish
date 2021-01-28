@@ -1,9 +1,9 @@
-
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from os import closerange
-
-
+from users import create_user
+from users import get_all_users
+from users import get_single_user
 
 class HandleRequests(BaseHTTPRequestHandler):
 
@@ -59,7 +59,7 @@ class HandleRequests(BaseHTTPRequestHandler):
         if len(parsed) == 2:
             (resource, id) = parsed
 
-            if resource == "animals":
+            if resource == "users":
                 if id is not None:
                     response = f"{get_single_user(id)}"
 
