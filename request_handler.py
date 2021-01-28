@@ -4,6 +4,7 @@ from os import closerange
 from users import create_user
 from users import get_all_users
 from users import get_single_user
+from categories import get_single_category, get_all_categories,create_category
 
 class HandleRequests(BaseHTTPRequestHandler):
 
@@ -66,6 +67,12 @@ class HandleRequests(BaseHTTPRequestHandler):
                 else:
                     response = f"{get_all_users()}"
 
+            if resource == "categories":
+                if id is not None:
+                    response = f"{get_single_category(id)}"
+                else:
+                    response = f"{get_all_categories()}"
+
         self.wfile.write(response.encode())
 
     def do_POST(self):
@@ -87,6 +94,13 @@ class HandleRequests(BaseHTTPRequestHandler):
             new_resource = create_new_comment(body)
 
         self.wfile.write(f"{new_resource}".encode())
+
+        new_category = None
+
+        if resource == "categories":
+            new_category = create_category(post_body)
+
+        self.wfile.write(f"{new_category}".encode())
 
 def main():
     host = ''
