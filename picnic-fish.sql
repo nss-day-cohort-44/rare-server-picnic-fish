@@ -168,3 +168,5 @@ VALUES
 (new_category['label'])
 
 INSERT INTO Categories ('label') VALUES ('backend developer');
+
+INSERT INTO Comments ('content', 'subject') VALUES ('This is a great post', 'Encouragement')
