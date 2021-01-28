@@ -131,3 +131,31 @@ INSERT INTO Reactions ('label', 'image_url') VALUES ('heart', 'https://lh3.googl
 INSERT INTO AccountTypes ('label') VALUES ('Admin');
 INSERT INTO AccountTypes ('label') VALUES ('Author');
 
+
+
+
+INSERT INTO Users (
+          'first_name', 
+          'last_name', 
+          'email', 
+          'password', 
+          'bio', 
+          'username',
+          'profile_image_url',
+          'created_on', 
+          'active',
+          'account_type_id') VALUES (
+            "Ellie", 
+            "Levine", 
+            "ellie@lo.com",
+            "password",
+            "I'm a nice person",
+            "ellie",
+            "http://",
+            "1598458543321",
+            1,
+            2
+          );
+
+DELETE FROM Users
+WHERE id = 1
