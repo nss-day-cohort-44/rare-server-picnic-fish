@@ -5,6 +5,7 @@ from users import create_user
 from users import get_all_users
 from users import get_single_user
 from categories import get_single_category, get_all_categories,create_category
+from comments import create_new_comment, get_all_comments, get_single_comment
 
 class HandleRequests(BaseHTTPRequestHandler):
 
@@ -73,6 +74,12 @@ class HandleRequests(BaseHTTPRequestHandler):
                 else:
                     response = f"{get_all_categories()}"
 
+            elif resource == "comments":
+                if id is not None:
+                    response = f"{get_single_comment(id)}"
+                else:
+                    response = f"{get_all_comments()}"
+
         self.wfile.write(response.encode())
 
     def do_POST(self):
@@ -91,7 +98,7 @@ class HandleRequests(BaseHTTPRequestHandler):
             new_resource = create_user(post_body)
 
         elif resource == "comments":
-            new_resource = create_new_comment(body)
+            new_resource = create_new_comment(post_body)
 
         self.wfile.write(f"{new_resource}".encode())
 
