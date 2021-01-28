@@ -156,3 +156,14 @@ INSERT INTO Users (
             1,
             2
           );
+
+DELETE FROM Users
+WHERE id = 1
+
+INSERT INTO categories
+    (label)
+VALUES
+  (?);
+(new_category['label'])
+
+INSERT INTO Categories ('label') VALUES ('backend developer');
