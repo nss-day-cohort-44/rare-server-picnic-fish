@@ -83,6 +83,9 @@ class HandleRequests(BaseHTTPRequestHandler):
         if resource == "users":
             new_resource = create_user(post_body)
 
+        elif resource == "comments":
+            new_resource = create_new_comment(body)
+
         self.wfile.write(f"{new_resource}".encode())
 
 def main():
