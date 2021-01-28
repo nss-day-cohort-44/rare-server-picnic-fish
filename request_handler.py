@@ -5,6 +5,7 @@ from users import create_user
 from users import get_all_users
 from users import get_single_user
 from categories import get_single_category, get_all_categories,create_category
+from posts import get_all_posts
 
 class HandleRequests(BaseHTTPRequestHandler):
 
@@ -73,6 +74,12 @@ class HandleRequests(BaseHTTPRequestHandler):
                 else:
                     response = f"{get_all_categories()}"
 
+            if resource == "posts":
+                if id is not None:
+                    response = f"{get_single_post(id)}"
+                else:
+                    response = f"{get_all_posts()}"
+
         self.wfile.write(response.encode())
 
     def do_POST(self):
@@ -85,19 +92,17 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         (resource, id) = self.parse_url(self.path)
 
-        new_resource = None
 
         if resource == "users":
-            new_resource = create_user(post_body)
-
-        self.wfile.write(f"{new_resource}".encode())
+            new_resource = f"{create_user(post_body)}"
+            self.wfile.write(new_resource.encode())
 
         new_category = None
 
         if resource == "categories":
             new_category = create_category(post_body)
 
-        self.wfile.write(f"{new_category}".encode())
+            self.wfile.write(f"{new_category}".encode())
 
 def main():
     host = ''
