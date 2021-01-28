@@ -60,6 +60,7 @@ CREATE TABLE "Comments" (
   "post_id" INTEGER,
   "author_id" INTEGER,
   "content" varchar,
+  "subject" varchar,
   "created_on" DATETIME,
   FOREIGN KEY(`post_id`) REFERENCES `Posts`(`id`),
   FOREIGN KEY(`author_id`) REFERENCES `Users`(`id`)
@@ -169,4 +170,7 @@ VALUES
 
 INSERT INTO Categories ('label') VALUES ('backend developer');
 
-INSERT INTO Comments ('content', 'subject') VALUES ('This is a great post', 'Encouragement')
+
+INSERT INTO Comments ('post_id', 'author_id', 'content', 'subject', 'created_on') VALUES (1, 1, 'This is a great post', 'Encouragement', "1598458543321");
+INSERT INTO Comments ('post_id', 'author_id', 'content', 'subject', 'created_on') VALUES (1, 1, 'This is a terrible post', 'Discouragement', "1598458543321");
+
