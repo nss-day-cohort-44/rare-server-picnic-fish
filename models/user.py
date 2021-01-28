@@ -8,7 +8,7 @@ class User():
         self.email = email
         self.password = password
         self.bio = bio
-        self.userName = user_name
+        self.username = user_name
         self.profileImageUrl = profile_image_url
         self.createdOn = created_on
         self.active = active
