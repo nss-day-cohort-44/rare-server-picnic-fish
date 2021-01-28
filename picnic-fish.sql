@@ -156,6 +156,3 @@ INSERT INTO Users (
             1,
             2
           );
-
-DELETE FROM Users
-WHERE id = 1
