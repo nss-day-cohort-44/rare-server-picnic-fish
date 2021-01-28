@@ -1,3 +1,16 @@
+DROP TABLE IF EXISTS `Categories`;
+DROP TABLE IF EXISTS `Tags`;
+DROP TABLE IF EXISTS `Reactions`;
+DROP TABLE IF EXISTS `PostReactions`;
+DROP TABLE IF EXISTS `Posts`;
+DROP TABLE IF EXISTS `PostTags`;
+DROP TABLE IF EXISTS `Comments`;
+DROP TABLE IF EXISTS `Subscriptions`;
+DROP TABLE IF EXISTS `DemotionQueue`;
+DROP TABLE IF EXISTS `Users`;
+DROP TABLE IF EXISTS `AccountTypes`;
+
+
 CREATE TABLE "AccountTypes" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "label" varchar
@@ -7,6 +20,7 @@ CREATE TABLE "Users" (
   "first_name" varchar,
   "last_name" varchar,
   "email" varchar,
+  "password" varchar,
   "bio" varchar,
   "username" varchar,
   "profile_image_url" varchar,
@@ -116,3 +130,32 @@ INSERT INTO Reactions ('label', 'image_url') VALUES ('happy', 'https://pngtree.c
 INSERT INTO Reactions ('label', 'image_url') VALUES ('heart', 'https://lh3.googleusercontent.com/proxy/BlwtWdiO1ucoroiKKuJN5CpiAUFA4tdHYRT_yXzxWLpNVTJS7UEVp1JV-lYshjAPeS7wd1pqXk6mpxY6rrSAPXD5NbBoE9hTf-1PpzofQbzNyH__1miggtO2IQKktovnAyPzjCW6T9mQG6JvgdHklZUaMd-YnIxeBPuP1lBw2E7fp9d6AR68');
 INSERT INTO AccountTypes ('label') VALUES ('Admin');
 INSERT INTO AccountTypes ('label') VALUES ('Author');
+
+
+
+
+INSERT INTO Users (
+          'first_name', 
+          'last_name', 
+          'email', 
+          'password', 
+          'bio', 
+          'username',
+          'profile_image_url',
+          'created_on', 
+          'active',
+          'account_type_id') VALUES (
+            "Ellie", 
+            "Levine", 
+            "ellie@lo.com",
+            "password",
+            "I'm a nice person",
+            "ellie",
+            "http://",
+            "1598458543321",
+            1,
+            2
+          );
+
+DELETE FROM Users
+WHERE id = 1
