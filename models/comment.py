@@ -6,4 +6,5 @@ class Comment():
         self.content = content
         self.subject = subject
         self.createdOn = created_on
-        
+        self.post = None
+        self.author = None
