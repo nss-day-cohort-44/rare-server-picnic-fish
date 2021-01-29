@@ -6,6 +6,7 @@ from users import get_all_users
 from users import get_single_user
 from categories import get_single_category, get_all_categories,create_category
 from posts import get_all_posts
+from tags import get_all_tags
 
 class HandleRequests(BaseHTTPRequestHandler):
 
@@ -79,6 +80,12 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = f"{get_single_post(id)}"
                 else:
                     response = f"{get_all_posts()}"
+
+            if resource == "tags":
+                if id is not None:
+                    response = f"{get_single_tag(id)}"
+                else:
+                    response = f"{get_all_tags()}"
 
         self.wfile.write(response.encode())
 
