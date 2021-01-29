@@ -137,19 +137,18 @@ def check_user(user):
 
         db_cursor.execute("""
         SELECT
-            u.email,
-            u.password
+            u.id
         FROM users u
         WHERE u.email = ? AND u.password = ?
         """, (user['email'],
               user['password']
-              ))     
+              ))    
 
+        data = db_cursor.fetchone() 
 
-        id = db_cursor.
-
-    data={}
-    data["valid"]=True
-    data["token"]=id
+        id = data[0]
+        response={}
+        response["valid"]=True
+        response["token"]=id
     
-    return json.dumps(data)
+    return json.dumps(response)
