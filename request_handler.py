@@ -115,6 +115,11 @@ class HandleRequests(BaseHTTPRequestHandler):
 
             self.wfile.write(f"{new_category}".encode())
 
+        if resource == "posts":
+            new_post = create_post(post_body)
+
+            self.wfile.write(f"{new_post}".encode())
+
 def main():
     host = ''
     port = 8088
