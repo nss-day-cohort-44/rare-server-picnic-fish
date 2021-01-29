@@ -61,7 +61,7 @@ def create_new_comment(new_comment):
             created_on)
         VALUES
             (?, ?, ?, ?, ?);
-        """, (new_comment['post_id'], new_comment['author_id'], new_comment['content'], new_comment['subject'], new_comment['created_on']))
+        """, (new_comment['postId'], new_comment['authorId'], new_comment['content'], new_comment['subject'], new_comment['createdOn']))
 
         id = db_cursor.lastrowid
         new_comment['id'] = id
