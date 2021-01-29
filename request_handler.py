@@ -81,7 +81,7 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = f"{get_single_comment(id)}"
                 else:
                     response = f"{get_all_comments()}"
-            if resource == "posts":
+            if resource == "myPosts":
                 if id is not None:
                     response = f"{get_single_post(id)}"
                 else:
@@ -116,7 +116,7 @@ class HandleRequests(BaseHTTPRequestHandler):
 
             self.wfile.write(f"{new_category}".encode())
 
-        if resource == "posts":
+        if resource == "newPost":
             new_post = create_post(post_body)
 
             self.wfile.write(f"{new_post}".encode())
