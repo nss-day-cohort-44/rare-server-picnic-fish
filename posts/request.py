@@ -37,7 +37,7 @@ def get_all_posts():
             # Note that the database fields are specified in
             # exact order of the parameters defined in the
             # Animal class above.
-            post = Post(row['user_id'], row['category_id'], row["title"], row["publication_date"], row['image_url'], row['content'], row['approved'])
+            post = Post(row['userId'], row['categoryId'], row["title"], row["publicationDate"], row['imageUrl'], row['content'], row['approved'])
 
             posts.append(post.__dict__)
 
