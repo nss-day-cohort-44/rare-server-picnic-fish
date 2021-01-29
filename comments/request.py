@@ -45,7 +45,7 @@ def get_single_comment(id):
 
         data = db_cursor.fetchone()
 
-        comment = Comment(row['id'], row['post_id'], row['author_id'], row['content'], row['subject'], row['created_on'])
+        comment = Comment(data['id'], data['post_id'], data['author_id'], data['content'], data['subject'], data['created_on'])
 
     return json.dumps(comment.__dict__)
 
@@ -61,7 +61,7 @@ def create_new_comment(new_comment):
             created_on)
         VALUES
             (?, ?, ?, ?, ?);
-        """, (new_comment['post_id'], new_comment['author_id'], new_comment['content'], new_comment['subject'], new_comment['created_on'], ))
+        """, (new_comment['post_id'], new_comment['author_id'], new_comment['content'], new_comment['subject'], new_comment['created_on']))
 
         id = db_cursor.lastrowid
         new_comment['id'] = id
