@@ -52,6 +52,20 @@ def get_single_post():
 
             data = db_cursor.fetchone()
 
-            post = Post(data['userId'], data['categoryId'], data["title"], data["publicationDate"],
+            post = Post(data['id'], data['userId'], data['categoryId'], data["title"], data["publicationDate"],
                             data['imageUrl'], data['content'], data['approved'])
             return json.dumps(post.__dict__)
+
+def create_post(new_post):
+    with sqlite3.connect("./picnic-fish.db") as conn:
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        INSERT INTO posts
+            (id, userId, categoryId, title, publicationDate,
+            imageUrl, content, approved)
+        VALUES
+            (?, ?, ?, ?, ?, ?, ?, ?);
+        """, ((new_post['id'], new_post['userId'], new_post['categoryId'], new_post["title"], new_post["publicationDate"],
+                            new_post['imageUrl'], new_post['content'], new_post['approved'], )))
+    return json.dumps(new_post)
