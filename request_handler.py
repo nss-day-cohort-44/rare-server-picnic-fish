@@ -4,6 +4,7 @@ from os import closerange
 from users import create_user
 from users import get_all_users
 from users import get_single_user
+from users import check_user
 from categories import get_single_category, get_all_categories,create_category
 from posts import get_all_posts
 
@@ -95,7 +96,10 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         if resource == "users":
             new_resource = f"{create_user(post_body)}"
-            self.wfile.write(new_resource.encode())
+        if resource == "login":
+            new_resource = f"{check_user(post_body)}"
+            
+        self.wfile.write(new_resource.encode())
 
         new_category = None
 
