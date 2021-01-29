@@ -59,6 +59,29 @@ def create_category(new_category):
         new_category['id'] = id
     return json.dumps(new_category)
 
+def update_category(id, new_category):
+    with sqlite3.connect("./picnic-fish.db") as conn:
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        UPDATE categories
+            SET
+                label = ?
+
+        WHERE id = ?
+        """, (new_category['label'],id, ))
+
+        # Were any rows affected?
+        # Did the client send an `id` that exists?
+        rows_affected = db_cursor.rowcount
+
+    if rows_affected == 0:
+        # Forces 404 response by main module
+        return False
+    else:
+        # Forces 204 response by main module
+        return True
+
 
 
 

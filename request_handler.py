@@ -4,7 +4,7 @@ from os import closerange
 from users import create_user
 from users import get_all_users
 from users import get_single_user
-from categories import get_single_category, get_all_categories,create_category
+from categories import get_single_category, get_all_categories,create_category,update_category
 from posts import get_all_posts
 
 class HandleRequests(BaseHTTPRequestHandler):
@@ -103,6 +103,29 @@ class HandleRequests(BaseHTTPRequestHandler):
             new_category = create_category(post_body)
 
             self.wfile.write(f"{new_category}".encode())
+
+        # It handles any PUT request.
+    def do_PUT(self):
+        self._set_headers(204)
+        content_len = int(self.headers.get('content-length', 0))
+        post_body = self.rfile.read(content_len)
+        post_body = json.loads(post_body)
+
+        # Parse the URL
+        (resource, id) = self.parse_url(self.path)
+
+        success = False
+        # edit a single animal from the list
+        if resource == "categories":
+            success = update_category(id, post_body)
+
+        if success:
+            self._set_headers(204)
+        else:
+            self._set_headers(404)
+
+        # Encode the new animal and send in response
+        self.wfile.write("".encode())
 
 def main():
     host = ''
