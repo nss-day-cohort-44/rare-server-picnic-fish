@@ -179,8 +179,3 @@ INSERT INTO Users (
         1,
         2
       );
-<<<<<<< HEAD
-=======
-
-DELETE FROM Users
->>>>>>> main
