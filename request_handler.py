@@ -6,6 +6,7 @@ from users import get_all_users
 from users import get_single_user
 from categories import get_single_category, get_all_categories,create_category
 from comments import create_new_comment, get_all_comments, get_single_comment
+from posts import get_all_posts
 
 class HandleRequests(BaseHTTPRequestHandler):
 
@@ -79,6 +80,11 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = f"{get_single_comment(id)}"
                 else:
                     response = f"{get_all_comments()}"
+            if resource == "posts":
+                if id is not None:
+                    response = f"{get_single_post(id)}"
+                else:
+                    response = f"{get_all_posts()}"
 
         self.wfile.write(response.encode())
 
@@ -92,22 +98,22 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         (resource, id) = self.parse_url(self.path)
 
-        new_resource = None
 
         if resource == "users":
-            new_resource = create_user(post_body)
+            new_resource = f"{create_user(post_body)}"
+            self.wfile.write(new_resource.encode())
 
-        elif resource == "comments":
+        if resource == "comments":
             new_resource = create_new_comment(post_body)
 
-        self.wfile.write(f"{new_resource}".encode())
+            self.wfile.write(f"{new_resource}".encode())
 
         new_category = None
 
         if resource == "categories":
             new_category = create_category(post_body)
 
-        self.wfile.write(f"{new_category}".encode())
+            self.wfile.write(f"{new_category}".encode())
 
 def main():
     host = ''

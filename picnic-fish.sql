@@ -133,6 +133,20 @@ INSERT INTO Reactions ('label', 'image_url') VALUES ('heart', 'https://lh3.googl
 INSERT INTO AccountTypes ('label') VALUES ('Admin');
 INSERT INTO AccountTypes ('label') VALUES ('Author');
 
+INSERT INTO Posts ('user_id', 
+                   'category_id',
+                   'title', 
+                   'publication_date', 
+                   'image_url', 
+                   'content', 
+                   'approved') 
+                   VALUES (2,
+                           1, 
+                           "american fighting", 
+                           134235634622, 
+                           "https", 
+                           "the great battle", 
+                           1);
 
 
 
