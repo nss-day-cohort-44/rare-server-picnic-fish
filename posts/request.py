@@ -10,7 +10,6 @@ def get_all_posts():
 
         db_cursor.execute("""
         SELECT
-            p.id,
             p.user_id,
             p.category_id,
             p.title,
@@ -25,8 +24,8 @@ def get_all_posts():
 
         dataset = db_cursor.fetchall()
         for row in dataset:
-            post = Post(row['userId'], row['categoryId'], row["title"], row["publicationDate"],
-                            row['imageUrl'], row['content'], row['approved'])
+            post = Post(row['user_id'], row['category_id'], row['title'], row['publication_date'],
+                            row['image_url'], row['content'], row['approved'])
             posts.append(post.__dict__)
 
     return json.dumps(posts)
@@ -39,7 +38,6 @@ def get_single_post():
             db_cursor.execute("""
             SELECT
                 SELECT
-            p.id,
             p.user_id,
             p.category_id,
             p.title,
@@ -52,8 +50,8 @@ def get_single_post():
 
             data = db_cursor.fetchone()
 
-            post = Post(data['id'], data['userId'], data['categoryId'], data["title"], data["publicationDate"],
-                            data['imageUrl'], data['content'], data['approved'])
+            post = Post(data['user_id'], data['category_id'], data["title"], data["publication_date"],
+                            data['image_url'], data['content'], data['approved'])
             return json.dumps(post.__dict__)
 
 def create_post(new_post):
@@ -62,10 +60,14 @@ def create_post(new_post):
 
         db_cursor.execute("""
         INSERT INTO posts
-            (id, userId, categoryId, title, publicationDate,
-            imageUrl, content, approved)
+            (user_id, category_id, title, publication_date,
+            image_url, content, approved)
         VALUES
-            (?, ?, ?, ?, ?, ?, ?, ?);
-        """, ((new_post['id'], new_post['userId'], new_post['categoryId'], new_post["title"], new_post["publicationDate"],
+            (?, ?, ?, ?, ?, ?, ?);
+        """, ((new_post['userId'], new_post['categoryId'], new_post["title"], new_post["publicationDate"],
                             new_post['imageUrl'], new_post['content'], new_post['approved'], )))
+
+        id = db_cursor.lastrowid
+        new_post['id'] = id
+
     return json.dumps(new_post)
