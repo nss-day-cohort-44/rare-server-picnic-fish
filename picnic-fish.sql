@@ -156,8 +156,8 @@ INSERT INTO Posts ('user_id',
                    'approved') 
                    VALUES (3,
                            2, 
-                           "The American Dream", 
-                           134235634622, 
+                           "The American Dream v2", 
+                           134235634640, 
                            "https//", 
                            "We all want the Amereican dream but what exactly is that?", 
                            1);
