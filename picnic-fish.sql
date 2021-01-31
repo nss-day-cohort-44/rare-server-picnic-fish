@@ -147,6 +147,20 @@ INSERT INTO Posts ('user_id',
                            "https", 
                            "the great battle", 
                            1);
+INSERT INTO Posts ('user_id', 
+                   'category_id',
+                   'title', 
+                   'publication_date', 
+                   'image_url', 
+                   'content', 
+                   'approved') 
+                   VALUES (3,
+                           2, 
+                           "The American Dream v2", 
+                           134235634640, 
+                           "https//", 
+                           "We all want the Amereican dream but what exactly is that?", 
+                           1);
 
 
 
