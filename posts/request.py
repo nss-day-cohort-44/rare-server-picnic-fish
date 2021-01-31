@@ -1,6 +1,8 @@
 import sqlite3
 import json
 from models import Post
+from models.user import User
+from models.categories import Category
 
 def get_all_posts():
 
@@ -16,8 +18,24 @@ def get_all_posts():
             p.publication_date,
             p.image_url,
             p.content,
-            p.approved
+            p.approved,
+            u.id,
+            u.first_name,
+            u.last_name,
+            u.email,
+            u.password,
+            u.bio,
+            u.username,
+            u.profile_image_url,
+            u.created_on,
+            u.active,
+            u.account_type_id,
+            c.label
         FROM posts p
+        JOIN users u
+            ON u.id = p.user_id
+        JOIN categories c
+            ON c.id = p.category_id
         """)
 
         posts = []

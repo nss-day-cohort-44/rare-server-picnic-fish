@@ -151,6 +151,34 @@ VALUES (
   "Wonder dog is a dog. He's wonderful.",
   1
 );
+INSERT INTO Posts ('user_id', 
+                   'category_id',
+                   'title', 
+                   'publication_date', 
+                   'image_url', 
+                   'content', 
+                   'approved') 
+                   VALUES (2,
+                           1, 
+                           "american fighting", 
+                           134235634622, 
+                           "https", 
+                           "the great battle", 
+                           1);
+INSERT INTO Posts ('user_id', 
+                   'category_id',
+                   'title', 
+                   'publication_date', 
+                   'image_url', 
+                   'content', 
+                   'approved') 
+                   VALUES (3,
+                           2, 
+                           "The American Dream v2", 
+                           134235634640, 
+                           "https//", 
+                           "We all want the Amereican dream but what exactly is that?", 
+                           1);
 
 DROP TABLE IF EXISTS `Users`;
 
