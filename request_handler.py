@@ -82,7 +82,7 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = f"{get_single_comment(id)}"
                 else:
                     response = f"{get_all_comments()}"
-            if resource == "myPosts":
+            if resource == "posts":
                 if id is not None:
                     response = f"{get_single_post(id)}"
                 else:
