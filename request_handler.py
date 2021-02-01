@@ -120,35 +120,10 @@ class HandleRequests(BaseHTTPRequestHandler):
 
             self.wfile.write(f"{new_category}".encode())
 
-<<<<<<< HEAD
-        # It handles any PUT request.
-    def do_PUT(self):
-        self._set_headers(204)
-        content_len = int(self.headers.get('content-length', 0))
-        post_body = self.rfile.read(content_len)
-        post_body = json.loads(post_body)
-
-        # Parse the URL
-        (resource, id) = self.parse_url(self.path)
-
-        success = False
-        # edit a single animal from the list
-        if resource == "categories":
-            success = update_category(id, post_body)
-
-        if success:
-            self._set_headers(204)
-        else:
-            self._set_headers(404)
-
-        # Encode the new animal and send in response
-        self.wfile.write("".encode())
-=======
         if resource == "newPost":
             new_post = create_post(post_body)
 
             self.wfile.write(f"{new_post}".encode())
->>>>>>> main
 
 def main():
     host = ''
