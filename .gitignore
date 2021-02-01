@@ -150,3 +150,8 @@ rare.db
 .vscode
 Pipfile*
 .DS_Store
+
+picnic-fish.sql
+picnic-fish.db 
+
+*.sql
