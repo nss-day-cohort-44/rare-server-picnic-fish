@@ -60,6 +60,8 @@ CREATE TABLE "Comments" (
   "post_id" INTEGER,
   "author_id" INTEGER,
   "content" varchar,
+  "subject" varchar,
+  "created_on" DATETIME,
   FOREIGN KEY(`post_id`) REFERENCES `Posts`(`id`),
   FOREIGN KEY(`author_id`) REFERENCES `Users`(`id`)
 );
@@ -145,6 +147,20 @@ INSERT INTO Posts ('user_id',
                            "https", 
                            "the great battle", 
                            1);
+INSERT INTO Posts ('user_id', 
+                   'category_id',
+                   'title', 
+                   'publication_date', 
+                   'image_url', 
+                   'content', 
+                   'approved') 
+                   VALUES (3,
+                           2, 
+                           "The American Dream v2", 
+                           134235634640, 
+                           "https//", 
+                           "We all want the Amereican dream but what exactly is that?", 
+                           1);
 
 
 
@@ -181,3 +197,8 @@ VALUES
 (new_category['label'])
 
 INSERT INTO Categories ('label') VALUES ('backend developer');
+
+
+INSERT INTO Comments ('post_id', 'author_id', 'content', 'subject', 'created_on') VALUES (1, 1, 'This is a great post', 'Encouragement', "1598458543321");
+INSERT INTO Comments ('post_id', 'author_id', 'content', 'subject', 'created_on') VALUES (1, 1, 'This is a terrible post', 'Discouragement', "1598458543321");
+
