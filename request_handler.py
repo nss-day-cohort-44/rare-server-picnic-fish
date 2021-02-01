@@ -6,7 +6,7 @@ from users import create_user
 from users import get_all_users
 from users import get_single_user
 from users import check_user
-from categories import get_single_category, get_all_categories,create_category
+from categories import get_single_category, get_all_categories,create_category,update_category
 from comments import create_new_comment, get_all_comments, get_single_comment
 from tags import get_all_tags
 from tags  import create_tag
@@ -129,6 +129,28 @@ class HandleRequests(BaseHTTPRequestHandler):
             new_resource = create_tag(post_body)
 
         self.wfile.write(f"{new_resource}".encode())
+
+    def do_PUT(self):
+        self._set_headers(204)
+        content_len = int(self.headers.get('content-length', 0))
+        post_body = self.rfile.read(content_len)
+        post_body = json.loads(post_body)
+
+        # Parse the URL
+        (resource, id) = self.parse_url(self.path)
+
+        success = False
+        # edit a single animal from the list
+        if resource == "categories":
+            success =update_category(id, post_body)
+
+        if success:
+            self._set_headers(204)
+        else:
+            self._set_headers(404)
+
+        # Encode the new animal and send in response
+        self.wfile.write("".encode())
 
 def main():
     host = ''
