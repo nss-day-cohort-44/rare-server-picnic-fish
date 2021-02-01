@@ -133,6 +133,24 @@ INSERT INTO Reactions ('label', 'image_url') VALUES ('heart', 'https://lh3.googl
 INSERT INTO AccountTypes ('label') VALUES ('Admin');
 INSERT INTO AccountTypes ('label') VALUES ('Author');
 
+INSERT INTO Posts (
+  "user_id",
+  "category_id",
+  "title",
+  "publication_date",
+  "image_url",
+  "content",
+  "approved"
+)
+VALUES (
+  1,
+  1,
+  "WonderDog",
+  1471300214792,
+  "https://wonderdogtraining.com/wp-content/uploads/2020/09/wonderdog-circle-logo-09.png",
+  "Wonder dog is a dog. He's wonderful.",
+  1
+);
 INSERT INTO Posts ('user_id', 
                    'category_id',
                    'title', 
@@ -147,44 +165,45 @@ INSERT INTO Posts ('user_id',
                            "https", 
                            "the great battle", 
                            1);
+INSERT INTO Posts ('user_id', 
+                   'category_id',
+                   'title', 
+                   'publication_date', 
+                   'image_url', 
+                   'content', 
+                   'approved') 
+                   VALUES (3,
+                           2, 
+                           "The American Dream v2", 
+                           134235634640, 
+                           "https//", 
+                           "We all want the Amereican dream but what exactly is that?", 
+                           1);
 
+DROP TABLE IF EXISTS `Users`;
 
+SELECT *
+FROM Posts;
 
 INSERT INTO Users (
-          'first_name', 
-          'last_name', 
-          'email', 
-          'password', 
-          'bio', 
-          'username',
-          'profile_image_url',
-          'created_on', 
-          'active',
-          'account_type_id') VALUES (
-            "Ellie", 
-            "Levine", 
-            "ellie@lo.com",
-            "password",
-            "I'm a nice person",
-            "ellie",
-            "http://",
-            "1598458543321",
-            1,
-            2
-          );
-
-DELETE FROM Users
-WHERE id = 1
-
-INSERT INTO categories
-    (label)
-VALUES
-  (?);
-(new_category['label'])
-
-INSERT INTO Categories ('label') VALUES ('backend developer');
-
-
-INSERT INTO Comments ('post_id', 'author_id', 'content', 'subject', 'created_on') VALUES (1, 1, 'This is a great post', 'Encouragement', "1598458543321");
-INSERT INTO Comments ('post_id', 'author_id', 'content', 'subject', 'created_on') VALUES (1, 1, 'This is a terrible post', 'Discouragement', "1598458543321");
-
+     'first_name', 
+      'last_name', 
+      'email', 
+      'password', 
+      'bio', 
+      'username',
+      'profile_image_url',
+      'created_on', 
+      'active',
+      'account_type_id') VALUES (
+        "Patrick", 
+        "Stewart", 
+        "not@real.email",
+        "password",
+        "I'm not a nice person",
+        "patrick",
+        "http://",
+        "1598458543321",
+        1,
+        2
+      );
