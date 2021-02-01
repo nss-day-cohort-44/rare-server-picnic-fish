@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "8d5e5f5d9db12126890a958d663e0fb38f1e50e27cec1188ccef4cab0fc1564d"
+            "sha256": "85dac8c1ec736095215eb1bc31dc0d8679434141575f39e276babffdadb4c0ed"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "3.9"
+            "python_version": "3.8"
         },
         "sources": [
             {
@@ -41,11 +41,11 @@
         },
         "watchgod": {
             "hashes": [
-                "sha256:59700dab7445aa8e6067a5b94f37bae90fc367554549b1ed2e9d0f4f38a90d2a",
-                "sha256:e9cca0ab9c63f17fc85df9fd8bd18156ff00aff04ebe5976cee473f4968c6858"
+                "sha256:48140d62b0ebe9dd9cf8381337f06351e1f2e70b2203fa9c6eff4e572ca84f29",
+                "sha256:d6c1ea21df37847ac0537ca0d6c2f4cdf513562e95f77bb93abbcf05573407b7"
             ],
             "index": "pypi",
-            "version": "==0.6"
+            "version": "==0.7"
         }
     },
     "develop": {}
