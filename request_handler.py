@@ -8,6 +8,8 @@ from users import get_single_user
 from users import check_user
 from categories import get_single_category, get_all_categories,create_category
 from comments import create_new_comment, get_all_comments, get_single_comment
+from tags import get_all_tags
+from tags  import create_tag
 from posts import get_all_posts, get_single_post, create_post
 
 class HandleRequests(BaseHTTPRequestHandler):
@@ -71,7 +73,7 @@ class HandleRequests(BaseHTTPRequestHandler):
                 else:
                     response = f"{get_all_users()}"
 
-            if resource == "categories":
+            elif resource == "categories":
                 if id is not None:
                     response = f"{get_single_category(id)}"
                 else:
@@ -82,11 +84,17 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = f"{get_single_comment(id)}"
                 else:
                     response = f"{get_all_comments()}"
-            if resource == "posts":
+            elif resource == "posts":
                 if id is not None:
                     response = f"{get_single_post(id)}"
                 else:
                     response = f"{get_all_posts()}"
+
+            elif resource == "tags":
+                if id is not None:
+                    response = f"{get_single_tag(id)}"
+                else:
+                    response = f"{get_all_tags()}"
 
         self.wfile.write(response.encode())
 
@@ -100,30 +108,27 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         (resource, id) = self.parse_url(self.path)
 
+        new_resource = None
 
         if resource == "users":
             new_resource = f"{create_user(post_body)}"
-        if resource == "login":
+        
+        elif resource == "login":
             new_resource = f"{check_user(post_body)}"
-            
-            self.wfile.write(new_resource.encode())
 
-        if resource == "comments":
+        elif resource == "comments":
             new_resource = create_new_comment(post_body)
 
-            self.wfile.write(f"{new_resource}".encode())
+        elif resource == "categories":
+            new_resource = create_category(post_body)
 
-        new_category = None
+        elif resource == "newPost":
+            new_resource = create_post(post_body)
+        
+        elif resource == "tags":
+            new_resource = create_tag(post_body)
 
-        if resource == "categories":
-            new_category = create_category(post_body)
-
-            self.wfile.write(f"{new_category}".encode())
-
-        if resource == "newPost":
-            new_post = create_post(post_body)
-
-            self.wfile.write(f"{new_post}".encode())
+        self.wfile.write(f"{new_resource}".encode())
 
 def main():
     host = ''
