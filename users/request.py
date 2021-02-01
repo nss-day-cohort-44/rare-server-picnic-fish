@@ -130,3 +130,25 @@ def create_user(new_user):
     data["token"]=id
     
     return json.dumps(data)
+
+def check_user(user):
+    with sqlite3.connect("./picnic-fish.db") as conn:
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        SELECT
+            u.id
+        FROM users u
+        WHERE u.email = ? AND u.password = ?
+        """, (user['email'],
+              user['password']
+              ))    
+
+        data = db_cursor.fetchone() 
+
+        id = data[0]
+        response={}
+        response["valid"]=True
+        response["token"]=id
+    
+    return json.dumps(response)

@@ -133,24 +133,34 @@ INSERT INTO Reactions ('label', 'image_url') VALUES ('heart', 'https://lh3.googl
 INSERT INTO AccountTypes ('label') VALUES ('Admin');
 INSERT INTO AccountTypes ('label') VALUES ('Author');
 
-INSERT INTO Posts (
-  "user_id",
-  "category_id",
-  "title",
-  "publication_date",
-  "image_url",
-  "content",
-  "approved"
-)
-VALUES (
-  1,
-  1,
-  "WonderDog",
-  1471300214792,
-  "https://wonderdogtraining.com/wp-content/uploads/2020/09/wonderdog-circle-logo-09.png",
-  "Wonder dog is a dog. He's wonderful.",
-  1
-);
+INSERT INTO Posts ('user_id', 
+                   'category_id',
+                   'title', 
+                   'publication_date', 
+                   'image_url', 
+                   'content', 
+                   'approved') 
+                   VALUES (2,
+                           1, 
+                           "american fighting", 
+                           134235634622, 
+                           "https", 
+                           "the great battle", 
+                           1);
+INSERT INTO Posts ('user_id', 
+                   'category_id',
+                   'title', 
+                   'publication_date', 
+                   'image_url', 
+                   'content', 
+                   'approved') 
+                   VALUES (3,
+                           2, 
+                           "The American Dream v2", 
+                           134235634640, 
+                           "https//", 
+                           "We all want the Amereican dream but what exactly is that?", 
+                           1);
 
 DROP TABLE IF EXISTS `Users`;
 
