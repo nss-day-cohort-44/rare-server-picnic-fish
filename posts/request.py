@@ -55,7 +55,7 @@ def get_all_posts():
             # Note that the database fields are specified in
             # exact order of the parameters defined in the
             # Post class above.
-            post = Post(row['user_id'], row['category_id'], row["title"], row["publication_date"], row['image_url'], row['content'], row['approved'])
+            post = Post(row['user_id'], row['category_id'], row["title"], row["publication_date"], row['image_url'], row['content'], row['approved'], row['id'])
 
             user = User(row['id'], row['first_name'], row['last_name'], row['email'],
                         row['password'], row['bio'], row['username'], row['profile_image_url'], row['created_on'],
@@ -70,30 +70,55 @@ def get_all_posts():
     # Use `json` package to properly serialize list as JSON
     return json.dumps(posts)
 
-def get_single_post():
+def get_single_post(id):
     with sqlite3.connect("./picnic-fish.db") as conn:
             conn.row_factory = sqlite3.Row
             db_cursor = conn.cursor()
 
             db_cursor.execute("""
             SELECT
-                SELECT
-            p.user_id,
-            p.category_id,
-            p.title,
-            p.publication_date,
-            p.image_url,
-            p.content,
-            p.approved
-        FROM posts p
+                p.id,
+                p.user_id,
+                p.category_id,
+                p.title,
+                p.publication_date,
+                p.image_url,
+                p.content,
+                p.approved,
+                u.id,
+                u.first_name,
+                u.last_name,
+                u.email,
+                u.password,
+                u.bio,
+                u.username,
+                u.profile_image_url,
+                u.created_on,
+                u.active,
+                u.account_type_id,
+                c.label
+            FROM posts p
+            JOIN users u
+                ON u.id = p.user_id
+            JOIN categories c
+                ON c.id = p.category_id
+            WHERE p.id = ?
             """, (id, ))
 
             data = db_cursor.fetchone()
 
-            post = Post(data['user_id'], data['category_id'], data["title"], data["publication_date"],
-                            data['image_url'], data['content'], data['approved'])
-            return json.dumps(post.__dict__)
+            post = Post(data['user_id'], data['category_id'], data["title"], data["publication_date"], data['image_url'], data['content'], data['approved'], data['id'])
 
+            user = User(data['id'], data['first_name'], data['last_name'], data['email'],
+                        data['password'], data['bio'], data['username'], data['profile_image_url'], data['created_on'],
+                        data['active'], data['account_type_id'])
+            post.user = user.__dict__
+
+            category = Category(data['id'], data['label'])
+            post.category = category.__dict__
+
+
+            return json.dumps(post.__dict__)
 def create_post(new_post):
     with sqlite3.connect("./picnic-fish.db") as conn:
         db_cursor = conn.cursor()
