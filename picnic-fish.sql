@@ -133,6 +133,24 @@ INSERT INTO Reactions ('label', 'image_url') VALUES ('heart', 'https://lh3.googl
 INSERT INTO AccountTypes ('label') VALUES ('Admin');
 INSERT INTO AccountTypes ('label') VALUES ('Author');
 
+INSERT INTO Posts (
+  "user_id",
+  "category_id",
+  "title",
+  "publication_date",
+  "image_url",
+  "content",
+  "approved"
+)
+VALUES (
+  1,
+  1,
+  "WonderDog",
+  1471300214792,
+  "https://wonderdogtraining.com/wp-content/uploads/2020/09/wonderdog-circle-logo-09.png",
+  "Wonder dog is a dog. He's wonderful.",
+  1
+);
 INSERT INTO Posts ('user_id', 
                    'category_id',
                    'title', 
@@ -189,5 +207,3 @@ INSERT INTO Users (
         1,
         2
       );
-
-DELETE FROM Users
