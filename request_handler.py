@@ -106,7 +106,7 @@ class HandleRequests(BaseHTTPRequestHandler):
         if resource == "login":
             new_resource = f"{check_user(post_body)}"
             
-        self.wfile.write(new_resource.encode())
+            self.wfile.write(new_resource.encode())
 
         if resource == "comments":
             new_resource = create_new_comment(post_body)

@@ -124,9 +124,14 @@ def create_post(new_post):
         db_cursor = conn.cursor()
 
         db_cursor.execute("""
-        INSERT INTO posts
-            (user_id, category_id, title, publication_date,
-            image_url, content, approved)
+        INSERT INTO Posts
+            ('user_id', 
+            'category_id',
+            'title', 
+            'publication_date', 
+            'image_url', 
+            'content', 
+            'approved')
         VALUES
             (?, ?, ?, ?, ?, ?, ?);
         """, ((new_post['userId'], new_post['categoryId'], new_post["title"], new_post["publicationDate"],
