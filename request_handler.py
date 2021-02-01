@@ -1,13 +1,14 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from os import closerange
+from posts.request import create_post, get_single_post
 from users import create_user
 from users import get_all_users
 from users import get_single_user
 from users import check_user
 from categories import get_single_category, get_all_categories,create_category
 from comments import create_new_comment, get_all_comments, get_single_comment
-from posts import get_all_posts
+from posts import get_all_posts, get_single_post, create_post
 
 class HandleRequests(BaseHTTPRequestHandler):
 
@@ -105,7 +106,7 @@ class HandleRequests(BaseHTTPRequestHandler):
         if resource == "login":
             new_resource = f"{check_user(post_body)}"
             
-        self.wfile.write(new_resource.encode())
+            self.wfile.write(new_resource.encode())
 
         if resource == "comments":
             new_resource = create_new_comment(post_body)
@@ -118,6 +119,11 @@ class HandleRequests(BaseHTTPRequestHandler):
             new_category = create_category(post_body)
 
             self.wfile.write(f"{new_category}".encode())
+
+        if resource == "newPost":
+            new_post = create_post(post_body)
+
+            self.wfile.write(f"{new_post}".encode())
 
 def main():
     host = ''
