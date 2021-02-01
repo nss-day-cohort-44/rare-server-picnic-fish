@@ -29,3 +29,21 @@ def get_all_tags():
             tags.append(tag.__dict__)
 
         return json.dumps(tags)
+
+def create_tag(new_tag):
+    with sqlite3.connect("./picnic-fish.db") as conn:
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        INSERT INTO Tags
+            (label)
+
+            VALUES (?);   
+        """, 
+        (new_tag['label'], ))
+
+        id = db_cursor.lastrowid
+
+        new_tag['id'] = id
+    
+    return json.dumps(new_tag)
