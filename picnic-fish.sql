@@ -246,3 +246,30 @@ VALUES (
     1,
     2
   );
+
+SELECT
+  p.id,
+  p.user_id,
+  p.category_id,
+  p.title,
+  p.publication_date,
+  p.image_url,
+  p.content,
+  p.approved,
+  u.id,
+  u.first_name,
+  u.last_name,
+  u.email,
+  u.password,
+  u.bio,
+  u.username,
+  u.profile_image_url,
+  u.created_on,
+  u.active,
+  u.account_type_id,
+  c.label
+FROM posts p
+JOIN users u
+    ON u.id = p.user_id
+JOIN categories c
+    ON c.id = p.category_id
