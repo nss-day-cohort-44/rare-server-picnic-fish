@@ -2,7 +2,7 @@ import sqlite3
 import json
 from models import Comment
 
-def get_all_comments():
+def get_comments_by_post(post_id):
     with sqlite3.connect("./picnic-fish.db") as conn:
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
@@ -15,39 +15,40 @@ def get_all_comments():
             c.subject,
             c.created_on
         FROM comments c
-        """)
-
+        WHERE post_id = ?
+        """, (post_id,))
         comments = []
         dataset = db_cursor.fetchall()
     
         for row in dataset:
             comment = Comment(row['id'], row['post_id'], row['author_id'], row['content'], row['subject'], row['created_on'])
+
             comments.append(comment.__dict__)
 
     return json.dumps(comments)
 
-def get_single_comment(id):
-    with sqlite3.connect("./picnic-fish.db") as conn:
-        conn.row_factory = sqlite3.Row
-        db_cursor = conn.cursor()
+# def get_single_comment(id):
+#     with sqlite3.connect("./picnic-fish.db") as conn:
+#         conn.row_factory = sqlite3.Row
+#         db_cursor = conn.cursor()
 
-        db_cursor.execute("""
-        SELECT
-            c.id,
-            c.post_id,
-            c.author_id,
-            c.content,
-            c.subject,
-            c.created_on
-        FROM comments c
-        WHERE c.id = ?
-        """, (id,))
+#         db_cursor.execute("""
+#         SELECT
+#             c.id,
+#             c.post_id,
+#             c.author_id,
+#             c.content,
+#             c.subject,
+#             c.created_on
+#         FROM comments c
+#         WHERE c.id = ?
+#         """, (id,))
 
-        data = db_cursor.fetchone()
+#         data = db_cursor.fetchone()
 
-        comment = Comment(data['id'], data['post_id'], data['author_id'], data['content'], data['subject'], data['created_on'])
+#         comment = Comment(data['id'], data['post_id'], data['author_id'], data['content'], data['subject'], data['created_on'])
 
-    return json.dumps(comment.__dict__)
+#     return json.dumps(comment.__dict__)
 
 def create_new_comment(new_comment):
     with sqlite3.connect("./picnic-fish.db") as conn:
