@@ -13,6 +13,7 @@ def get_all_categories():
                     c.id,
                     c.label
                 FROM categories c
+                ORDER BY c.label COLLATE NOCASE ASC
                 """)
 
                 categories =[]
@@ -58,6 +59,38 @@ def create_category(new_category):
         id = db_cursor.lastrowid
         new_category['id'] = id
     return json.dumps(new_category)
+
+def update_category(id, new_category):
+    with sqlite3.connect("./picnic-fish.db") as conn:
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        UPDATE categories
+            SET
+                label = ?
+
+        WHERE id = ?
+        """, (new_category['label'],id, ))
+
+        # Were any rows affected?
+        # Did the client send an `id` that exists?
+        rows_affected = db_cursor.rowcount
+
+    if rows_affected == 0:
+        # Forces 404 response by main module
+        return False
+    else:
+        # Forces 204 response by main module
+        return True
+
+def delete_category(id):
+    with sqlite3.connect("./picnic-fish.db") as conn:
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        DELETE FROM categories
+        WHERE id = ?
+        """, (id, ))
 
 
 
