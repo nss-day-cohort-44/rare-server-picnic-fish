@@ -1,1 +1,3 @@
-from .request import create_new_comment, get_all_comments, get_single_comment
+from .request import create_new_comment, get_comments_by_post 
+
+# get_single_comment

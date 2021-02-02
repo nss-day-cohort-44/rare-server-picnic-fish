@@ -7,7 +7,8 @@ from users import get_all_users
 from users import get_single_user
 from users import check_user
 from categories import get_single_category, get_all_categories,create_category,update_category
-from comments import create_new_comment, get_all_comments, get_single_comment
+from comments import create_new_comment, get_comments_by_post
+# from comments import get_single_comment
 from tags import get_all_tags
 from tags  import create_tag
 from posts import get_all_posts, get_single_post, create_post
@@ -69,7 +70,6 @@ class HandleRequests(BaseHTTPRequestHandler):
             if resource == "users":
                 if id is not None:
                     response = f"{get_single_user(id)}"
-
                 else:
                     response = f"{get_all_users()}"
 
@@ -79,16 +79,15 @@ class HandleRequests(BaseHTTPRequestHandler):
                 else:
                     response = f"{get_all_categories()}"
 
-            elif resource == "comments":
-                if id is not None:
-                    response = f"{get_single_comment(id)}"
-                else:
-                    response = f"{get_all_comments()}"
             elif resource == "posts":
                 if id is not None:
                     response = f"{get_single_post(id)}"
                 else:
                     response = f"{get_all_posts()}"
+
+            elif resource == "comments":
+                if id is not None:
+                    response = f"{get_comments_by_post(id)}"
 
             elif resource == "tags":
                 if id is not None:
