@@ -36,9 +36,9 @@ def get_all_posts():
             u.account_type_id,
             c.label
         FROM posts p
-        JOIN users u
+        LEFT JOIN users u
             ON u.id = p.user_id
-        JOIN categories c
+        LEFT JOIN categories c
             ON c.id = p.category_id
         """)
 

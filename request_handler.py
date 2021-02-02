@@ -9,6 +9,8 @@ from users import check_user
 from categories import get_single_category, get_all_categories,create_category,update_category
 from comments import create_new_comment, get_comments_by_post
 # from comments import get_single_comment
+from categories import get_single_category, get_all_categories
+from categories import create_category,update_category,delete_category
 from tags import get_all_tags
 from tags  import create_tag
 from posts import get_all_posts, get_single_post, create_post
@@ -150,6 +152,21 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         # Encode the new animal and send in response
         self.wfile.write("".encode())
+
+    def do_DELETE(self):
+        # Set a 204 response code
+        self._set_headers(204)
+
+        # Parse the URL
+        (resource, id) = self.parse_url(self.path)
+
+        # Delete a single category from the list
+        if resource == "categories":
+            delete_category(id)
+
+        self.wfile.write("".encode())
+
+
 
 def main():
     host = ''
