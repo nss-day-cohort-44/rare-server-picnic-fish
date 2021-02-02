@@ -82,6 +82,15 @@ def update_category(id, new_category):
         # Forces 204 response by main module
         return True
 
+def delete_category(id):
+    with sqlite3.connect("./picnic-fish.db") as conn:
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        DELETE FROM categories
+        WHERE id = ?
+        """, (id, ))
+
 
 
 
