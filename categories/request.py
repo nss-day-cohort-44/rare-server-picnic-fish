@@ -13,6 +13,7 @@ def get_all_categories():
                     c.id,
                     c.label
                 FROM categories c
+                ORDER BY c.label COLLATE NOCASE ASC
                 """)
 
                 categories =[]
