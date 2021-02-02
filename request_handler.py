@@ -11,7 +11,7 @@ from categories import create_category,update_category,delete_category
 from comments import create_new_comment, get_all_comments, get_single_comment
 from tags import get_all_tags
 from tags  import create_tag
-from posts import get_all_posts, get_single_post, create_post
+from posts import get_all_posts, get_single_post, create_post,update_post
 
 class HandleRequests(BaseHTTPRequestHandler):
 
@@ -144,6 +144,10 @@ class HandleRequests(BaseHTTPRequestHandler):
         # edit a single animal from the list
         if resource == "categories":
             success =update_category(id, post_body)
+
+        # edit a single post from the list
+        elif resource == "posts":
+            success =update_post(id, post_body)
 
         if success:
             self._set_headers(204)
