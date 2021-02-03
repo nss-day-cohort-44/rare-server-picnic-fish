@@ -17,6 +17,7 @@ from tags  import create_tag
 from posts import get_all_posts, get_single_post, create_post
 from post_tags import create_post_tag
 from post_tags import get_all_post_tags
+from posts import get_all_posts, get_single_post, create_post,update_post
 
 class HandleRequests(BaseHTTPRequestHandler):
 
@@ -113,7 +114,7 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         post_body = json.loads(post_body)
 
-        (resource, id) = self.parse_url(self.path)
+        (resource,id) = self.parse_url(self.path)
 
         new_resource = None
 
@@ -154,10 +155,14 @@ class HandleRequests(BaseHTTPRequestHandler):
         if resource == "categories":
             success =update_category(id, post_body)
 
-        if success:
-            self._set_headers(204)
-        else:
-            self._set_headers(404)
+            # edit a single post from the list
+        elif resource == "posts":
+            success =update_post(id, post_body)
+
+            if success:
+                self._set_headers(204)
+            else:
+                self._set_headers(404)
 
         # Encode the new animal and send in response
         self.wfile.write("".encode())

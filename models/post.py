@@ -1,7 +1,7 @@
 class Post():
 
     def __init__(self, user_id, category_id, title, publication_date, image_url, content, approved, id=""):
-        self.user_id = user_id
+        self.userId = user_id
         self.categoryId = category_id
         self.title = title
         self.publicationDate = publication_date
