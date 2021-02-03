@@ -161,6 +161,16 @@ VALUES (
     'heart',
     'https://lh3.googleusercontent.com/proxy/BlwtWdiO1ucoroiKKuJN5CpiAUFA4tdHYRT_yXzxWLpNVTJS7UEVp1JV-lYshjAPeS7wd1pqXk6mpxY6rrSAPXD5NbBoE9hTf-1PpzofQbzNyH__1miggtO2IQKktovnAyPzjCW6T9mQG6JvgdHklZUaMd-YnIxeBPuP1lBw2E7fp9d6AR68'
   );
+
+INSERT INTO PostTags ('post_id', 'tag_id')
+VALUES (2, 15);
+INSERT INTO PostTags ('post_id', 'tag_id')
+VALUES (2, 12);
+INSERT INTO PostTags ('post_id', 'tag_id')
+VALUES (2, 6);
+INSERT INTO PostTags ('post_id', 'tag_id')
+VALUES (2, 3);
+
 INSERT INTO AccountTypes ('label')
 VALUES ('Admin');
 INSERT INTO AccountTypes ('label')
@@ -247,10 +257,6 @@ VALUES (
     2
   );
 
-<<<<<<< HEAD
-  
-
-=======
 SELECT
   p.id,
   p.user_id,
@@ -276,5 +282,7 @@ FROM posts p
 JOIN users u
     ON u.id = p.user_id
 JOIN categories c
-    ON c.id = p.category_id
->>>>>>> main
+    ON c.id = p.category_id;
+
+UPDATE Posts SET id = 20
+WHERE id=1;
