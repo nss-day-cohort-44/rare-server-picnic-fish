@@ -107,7 +107,8 @@ def get_single_post(id):
 
             data = db_cursor.fetchone()
 
-            post = Post(data['user_id'], data['category_id'], data["title"], data["publication_date"], data['image_url'], data['content'], data['approved'], data['id'])
+            post = Post(data['user_id'], data['category_id'], data["title"], 
+            data["publication_date"], data['image_url'], data['content'], data['approved'], data['id'])
 
             user = User(data['id'], data['first_name'], data['last_name'], data['email'],
                         data['password'], data['bio'], data['username'], data['profile_image_url'], data['created_on'],
@@ -135,9 +136,38 @@ def create_post(new_post):
         VALUES
             (?, ?, ?, ?, ?, ?, ?);
         """, ((new_post['userId'], new_post['categoryId'], new_post["title"], new_post["publicationDate"],
-                            new_post['imageUrl'], new_post['content'], new_post['approved'], )))
+                new_post['imageUrl'], new_post['content'], new_post['approved'], )))
 
         id = db_cursor.lastrowid
         new_post['id'] = id
 
     return json.dumps(new_post)
+
+def update_post(id, new_post):
+    with sqlite3.connect("./picnic-fish.db") as conn:
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        UPDATE Posts
+            SET
+                user_id=?,
+                category_id=?,
+                title=?,
+                publication_date=?,
+                image_url=?,
+                content=?,
+                approved=?
+        WHERE id = ?
+        """, ((new_post['userId'],new_post['categoryId'],new_post['title'],new_post['publicationDate'],
+              new_post['imageUrl'],new_post['content'],new_post['approved'], id,)))
+
+        # Were any rows affected?
+        # Did the client send an `id` that exists?
+        rows_affected = db_cursor.rowcount
+
+    if rows_affected == 0:
+        # Forces 404 response by main module
+        return False
+    else:
+        # Forces 204 response by main module
+        return True
