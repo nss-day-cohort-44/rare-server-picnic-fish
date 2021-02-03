@@ -1,6 +1,7 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from os import closerange
+from post_tags.request import get_all_post_tags
 from posts.request import create_post, get_single_post
 from users import create_user
 from users import get_all_users
@@ -14,6 +15,8 @@ from categories import create_category,update_category,delete_category
 from tags import get_all_tags
 from tags  import create_tag
 from posts import get_all_posts, get_single_post, create_post
+from post_tags import create_post_tag
+from post_tags import get_all_post_tags
 
 class HandleRequests(BaseHTTPRequestHandler):
 
@@ -97,6 +100,9 @@ class HandleRequests(BaseHTTPRequestHandler):
                 else:
                     response = f"{get_all_tags()}"
 
+            elif resource == "posttags":
+                response = f"{get_all_post_tags()}"
+
         self.wfile.write(response.encode())
 
     def do_POST(self):
@@ -128,6 +134,9 @@ class HandleRequests(BaseHTTPRequestHandler):
         
         elif resource == "tags":
             new_resource = create_tag(post_body)
+
+        elif resource == "posttags":
+            new_resource = create_post_tag(post_body)    
 
         self.wfile.write(f"{new_resource}".encode())
 
